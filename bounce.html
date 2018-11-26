@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000000;
+        }
+        div>div{
+            width: 50px;
+            height: 50px;
+            background-color: deepskyblue;
+            border-radius: 25px;
+            position: absolute;
+            border: none;
+        }
+    </style>
+    <script src="js/Method.js"></script>
+</head>
+<body>
+    <div>
+        <!--<div></div>-->
+    </div>
+    <script>
+       /* var div0=document.querySelector("div");
+        var div1=document.querySelector("div>div");
+        var rect=div0.getBoundingClientRect();
+        var speedX=2;
+        var speedY=3;
+        animation();
+        function animation() {
+            requestAnimationFrame(animation);
+            if(div1.offsetLeft>=rect.left+rect.width-div1.offsetWidth || div1.offsetLeft<=rect.left){
+                speedX=-speedX;
+            }
+            if(div1.offsetTop>=rect.top+rect.height-div1.offsetHeight || div1.offsetTop<=rect.top){
+                speedY=-speedY;
+            }
+            div1.style.left=div1.offsetLeft+speedX+"px";
+            div1.style.top=div1.offsetTop+speedY+"px";
+        }*/
+
+       class Ball{
+            constructor(_speedX,_speedY){
+                this.ball=null;
+                this.speedX=_speedX;
+                this.speedY=_speedY;
+            }
+            createBall(parent){
+                if(!this.ball){
+                    this.ball=document.createElement("div");
+                    parent.appendChild(this.ball);
+                }
+                return this.ball;
+            }
+            update(rect){
+                if(this.ball.offsetLeft>=rect.left+rect.width-this.ball.offsetWidth || this.ball.offsetLeft<=rect.left){
+                    this.speedX=-this.speedX;
+                }
+                if(this.ball.offsetTop>=rect.top+rect.height-this.ball.offsetHeight || this.ball.offsetTop<=rect.top){
+                    this.speedY=-this.speedY;
+                }
+                this.ball.style.left=this.ball.offsetLeft+this.speedX+"px";
+                this.ball.style.top=this.ball.offsetTop+this.speedY+"px";
+            }
+       }
+
+       let list=[];
+       let div0=document.querySelector("div");
+       let rect=div0.getBoundingClientRect();
+       for(let i=0;i<10;i++){
+           let ball=new Ball(Method.random(2,10),Method.random(2,10));
+           ball.createBall(div0);
+           list.push(ball);
+       }
+
+
+       animation();
+        function animation() {
+            requestAnimationFrame(animation);
+            for(let i=0;i<list.length;i++){
+                list[i].update(rect);
+            }
+        }
+    </script>
+</body>
+</html>
