@@ -38,23 +38,4 @@ var obj={
     }
 }
 module.exports=obj;
-/*
-// 创建发送邮箱的对象
-let config={
-    service: 'qq', // 运营商  qq邮箱 网易//
-    port: 465,
-    secure: true,
-    auth: {
-        user:'1009131664@qq.com', //发送方的邮箱
-        pass: 'djtpfleipilcbbia' // pop3 授权码
-    }
-};
-let transporter=nodemailer.createTransport(config);
-module.exports=function (mail) {
-    transporter.sendMail(mail,function (error,info) {
-        if(error){
-            return  console.log(error);
-        }
-        console.log('mail sent',info.response);
-    });
-}*/
+
