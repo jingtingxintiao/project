@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="div0">
+    用户名:<input type="test" name="mail" id="mail"><br>
+    密&nbsp;&nbsp;&nbsp;码:<input type="text" name="password" id="psd"><br>
+    <button id="btn" name="btn">获取验证码</button>
+    <input type="text" name="check" id="check"><br>
+    <button id="reg">注册</button>
+</div>
+<div id="div1">
+    用户名:<input type="test" name="mail" id="mail1"><br>
+    密&nbsp;&nbsp;&nbsp;码:<input type="text" name="password" id="psd1"><br>
+    <button id="reg1">登录</button>
+</div>
+<script>
+    function getId(elem) {
+       return document.getElementById(elem);
+    }
+    getId("btn").addEventListener("click",btnClickHandler);
+    getId("reg").addEventListener("click",checkClickHandler);
+    getId("reg1").addEventListener("click",regClickHandler);
+
+    function btnClickHandler(e) {
+        e.preventDefault();
+        var num=Math.floor(Math.random()*10)+""+Math.floor(Math.random()*10)+Math.floor(Math.random()*10)+Math.floor(Math.random()*10);
+        var obj={mail:getId("mail").value,psd:getId("psd").value,check:num};
+        var xhr=new XMLHttpRequest();
+        xhr.addEventListener("load",loadHandler)
+        xhr.open("POST","http://localhost:3000/home/mail")
+        xhr.setRequestHeader("Content-Type","application/json");
+        xhr.send(JSON.stringify(obj));
+        console.log(obj);
+    }
+    function checkClickHandler() {
+        var obj={mail:getId("mail").value,psd:getId("psd").value,check:getId("check").value};
+        var xhr=new XMLHttpRequest();
+        xhr.addEventListener("load",checkloadHandler)
+        xhr.open("POST","http://localhost:3000/home/mailreg");
+        xhr.setRequestHeader("Content-Type","application/json");
+        xhr.send(JSON.stringify(obj));
+        console.log(obj);
+    }
+    function loadHandler() {
+        console.log(this.response)
+    }
+    function checkloadHandler() {
+        console.log(JSON.parse(this.response).err)
+        if(JSON.parse(this.response).err==0){
+            console.log("aaa")
+            getId("div0").style.display="none";
+            getId("div1").style.display="block";
+        }
+    }
+    function regClickHandler(e) {
+        var obj={mail:getId("mail1").value,psd:getId("psd1").value};
+        var xhr=new XMLHttpRequest();
+        xhr.addEventListener("load",regloadHandler)
+        xhr.open("POST","http://localhost:3000/home/maillogin");
+        xhr.setRequestHeader("Content-Type","application/json");
+        xhr.send(JSON.stringify(obj));
+        console.log(obj);
+    }
+    function regloadHandler(e) {
+        console.log(this.response);
+    }
+</script>
+</body>
+</html>
