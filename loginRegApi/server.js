@@ -3,7 +3,7 @@ const  url=require('url');
 const fs=require('fs');
 const path=require('path');
 var bodyParse=require('body-parser');
-const cors=require('cors');
+const cors=require('cors');//跨域
 const app=express();
 app.use(bodyParse.urlencoded({extend:false}))
 app.use(bodyParse.json());
