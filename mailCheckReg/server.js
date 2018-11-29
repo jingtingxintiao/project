@@ -49,8 +49,8 @@ app.post('/home/mail',(req,res)=>{
         }
         res.send('验证码发送成功');
     })
-    /*const mail=require('./sendmail.js');
-    mail.send(req.body.mail,req.body.check);*/
+    const mail=require('./sendmail.js');
+    mail.send(req.body.mail,req.body.check);
 })
 app.post('/home/mailreg',(req,res)=>{
     let query=strs.stringify(req.body);
