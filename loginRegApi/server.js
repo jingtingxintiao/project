@@ -2,11 +2,11 @@ const express=require('express');
 const  url=require('url');
 const fs=require('fs');
 const path=require('path');
-var bodyParse=require('body-parser');
+var bodyParse=require('body-parser');//post方式的获取消息体，post方式消息放在body里
 const cors=require('cors');//跨域
 const app=express();
-app.use(bodyParse.urlencoded({extend:false}))
-app.use(bodyParse.json());
+app.use(bodyParse.urlencoded({extend:false}))//只支持请求为x-www-form-urlenCoded格式
+app.use(bodyParse.json());//只支持请求为json格式
 app.use(cors());
 app.get('/home/reg',(req,res)=>{
     let search=url.parse(req.url).search;
